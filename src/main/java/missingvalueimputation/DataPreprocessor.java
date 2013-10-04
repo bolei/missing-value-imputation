@@ -18,18 +18,26 @@ public class DataPreprocessor {
 			for (int j = 0; j < colNum; j++) {
 				attValues[j] = inCompleteData[i][j];
 			}
-			attValues[colNum] = rowNum < 200 ? 1d : 0d; // assign labels
+			attValues[colNum] = i < rowNum / 2 ? 1d : 0d; // assign labels
 			instances.add(new DenseInstance(1.0, attValues));
 		}
 
-		inputMissingValue(instances);
+		imputeMissingValue(instances);
 
 		return instances;
 	}
 
-	private void inputMissingValue(Instances instances) {
-		// TODO Auto-generated method stub
-
+	private void imputeMissingValue(Instances instances) {
+		// replace missing values with 0
+		int instCount = instances.numInstances();
+		int featCount = instances.get(0).numAttributes() - 1;
+		for (int i = 0; i < instCount; i++) {
+			for (int j = 0; j < featCount; j++) {
+				if (Double.isNaN(instances.get(i).value(j))) {
+					instances.get(i).setValue(j, 0);
+				}
+			}
+		}
 	}
 
 	private Instances createEmptyInstances() {

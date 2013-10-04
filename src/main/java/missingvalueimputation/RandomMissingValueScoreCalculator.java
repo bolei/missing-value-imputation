@@ -10,7 +10,8 @@ public class RandomMissingValueScoreCalculator implements
 	private Random rand = new Random();
 
 	@Override
-	public double calcualteScore(Point p, Instances imputedData) {
+	public double calcualteScore(Point p, Instances imputedData,
+			double[][] incompleteData) {
 		return rand.nextDouble();
 	}
 

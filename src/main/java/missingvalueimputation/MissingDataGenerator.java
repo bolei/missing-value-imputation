@@ -17,7 +17,7 @@ public class MissingDataGenerator {
 		double[][] incompleteData = new double[rowNum][colNum];
 		for (int i = 0; i < rowNum; i++) {
 			for (int j = 0; j < colNum; j++) {
-				fullData[rowNum][colNum] = rand.nextInt(100) > missingValueRatio ? fullData[i][j]
+				incompleteData[i][j] = rand.nextInt(100) >= missingValueRatio ? fullData[i][j]
 						: Double.NaN;
 			}
 		}
